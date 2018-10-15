@@ -1,7 +1,7 @@
 export const SET_VISIBILITY = 'SET_VISIBILITY';
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const UPDATE_PACKAGE = 'UPDATE_PACKAGE';
-export const UPDATE_TOTALS = 'UPDATE_TOTALS';
+export const UPDATE_EXPENSES = 'UPDATE_EXPENSES';
 
 export function isVisible(name) {
     return {
@@ -24,9 +24,9 @@ export function updatePackage(data) {
     }
 }
 
-export function updateTotals(data) {
+export function updateExpenses(data) {
     return {
-        type: UPDATE_TOTALS,
+        type: UPDATE_EXPENSES,
         payload: data
     }
 }

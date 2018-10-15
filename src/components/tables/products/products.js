@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { updateProduct } from '../../../actions/index';
-import { updateTotals } from '../../../actions/index';
 
 class products extends Component {
 
@@ -90,7 +89,7 @@ class products extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ updateProduct, updateTotals }, dispatch);
+    return bindActionCreators({ updateProduct }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(products);
