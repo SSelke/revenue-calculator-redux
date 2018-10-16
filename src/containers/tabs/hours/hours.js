@@ -18,7 +18,6 @@ class product extends Component {
         return hours < 0 ? 0 : Math.ceil(hours);
     }
     render() {
-
         return (
             <div id="Hours" style={{ display: this.props.visible !== 'Hours' ? 'none' : 'block' }} className="justify-content-center">
                 <div className="container mt-5">
@@ -28,7 +27,6 @@ class product extends Component {
                                 <div className="card-body">
                                     <h5 className="card-title">Yearly Available Hours</h5>
                                     <h4>{this.getTotalHours()}</h4>
-                                    <div id="container"></div>
                                 </div>
                             </div>
                         </div>
