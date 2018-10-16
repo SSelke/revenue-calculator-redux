@@ -24,3 +24,9 @@ input {
 select {
   min-width: 180px;
 }
+
+#container {
+  margin: 20px;
+  width: 200px;
+  height: 200px;
+}
