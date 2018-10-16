@@ -3,6 +3,7 @@ import HoursInput from '../../../components/tables/hours/hours';
 import { connect } from 'react-redux';
 
 
+
 class product extends Component {
 
     getTotalHours = () => {
@@ -25,8 +26,8 @@ class product extends Component {
                         <div className="col-sm-6 mb-3">
                             <div className="card text-white bg-secondary mb-3 ml-auto mr-auto h-100">
                                 <div className="card-body">
-                                    <h5 className="card-title">Yearly Available Hours</h5>
-                                    <h4>{this.getTotalHours()}</h4>
+                                    <h1 className="card-title">Yearly Available Hours</h1>
+                                    <h2>{this.getTotalHours()}</h2>
                                 </div>
                             </div>
                         </div>
