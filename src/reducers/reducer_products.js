@@ -9,7 +9,8 @@ const initialState = {
     products: [
         { product: 'Authentication Setup', price: 500, rate: 0.25, id: getId(), percentage: 35 },
         { product: 'List Hygiene (100k)', price: 1995, rate: 2, id: getId(), percentage: 25 },
-        { product: 'List Hygiene (300k)', price: 3995, rate: 3.5, id: getId(), percentage: 10 },
+        { product: 'List Hygiene (200k)', price: 2995, rate: 3, id: getId(), percentage: 25 },
+        { product: 'List Hygiene (300k)', price: 3995, rate: 3.5, id: getId(), percentage: 5 },
         { product: 'De-List', price: 199, rate: 0.25, id: 4, percentage: 30 }
     ],
     packages: [

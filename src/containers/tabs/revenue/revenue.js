@@ -1,40 +1,84 @@
 import React, { Component } from 'react';
 import TableRevenue from '../../../components/tables/revenue/revenue';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { updatePercentage, updateHeader } from '../../../actions/index';
 
 class revenue extends Component {
 
-    state = {
-        productsPercentage: 75,
-        packagesPercentage: 25,
-        projection: 250000
-    }
-
-    updatePercentage = (event, type) => {
+    updatePercentageHandler = (event, type) => {
         let newPercentage = 0;
         let otherPercentage = 0;
+        const newData = {
+            ...this.props.revenueData
+        }
         switch(type) {
             case 'products':
-                newPercentage = this.state.productsPercentage;
-                newPercentage = event.target.value;
+                newPercentage = this.props.revenueData.productsPercentage;
+                newPercentage = Number(event.target.value);
                 otherPercentage = 100 - newPercentage;
-                this.setState({productsPercentage: newPercentage, packagesPercentage: otherPercentage});
+                newData.productsPercentage = newPercentage;
+                newData.packagesPercentage = otherPercentage;
+                this.props.updatePercentage(newData);
+                this.getTotal(this.props.data, newData);
                 return;
             case 'packages':
-                newPercentage = this.state.packagesPercentage;
-                newPercentage = event.target.value;
+                newPercentage = this.props.revenueData.packagesPercentage;
+                newPercentage = Number(event.target.value);
                 otherPercentage = 100 - newPercentage;
-                this.setState({packagesPercentage: newPercentage, productsPercentage: otherPercentage});
+                newData.packagesPercentage = newPercentage;
+                newData.productsPercentage = otherPercentage; 
+                this.props.updatePercentage(newData);
+                this.getTotal(this.props.data, newData);
                 return;
             default:
         }
     }
 
     updateProjection = (event) => {
-        this.setState({projection: event.target.value});
+        const newData = {
+            ...this.props.revenueData
+        }
+
+        newData.projection = event.target.value;
+        this.props.updatePercentage(newData);
+        this.getTotal(this.props.data, newData);
+    }
+
+    getTotal = (data, revInfo) => {
+
+        const newData = {
+            ...this.props.header
+        };
+        let revenue = 0;
+        data.products.map(data => {
+            const months = data.price === 0 ? 0 : Math.ceil((((Number(data.percentage) / 100) * Number((revInfo.productsPercentage / 100) * revInfo.projection)) / 12) / Number(data.price));
+            const revenueYear = Number(data.price) * (months * 12);
+            revenue += revenueYear;
+            return (null);
+        });
+
+        data.packages.map(data => {
+            const months = data.price === 0 ? 0 : Math.ceil((((Number(data.percentage) / 100) * Number((revInfo.packagesPercentage / 100) * revInfo.projection)) / 12) / Number(data.price));
+            const revenueYear = Number(data.price) * (months * 12);
+            revenue += revenueYear;
+            return (null);
+        });
+        newData.headers[1].value = revenue;
+        newData.headers[0].value = revenue - this.props.header.headers[2].value;
+        this.props.updateHeader(newData);
     }
 
     render() {
+
+        const products = (this.props.revenueData.productsPercentage / 100) * this.props.revenueData.projection;
+        const packages = (this.props.revenueData.packagesPercentage / 100) * this.props.revenueData.projection;
+
+        const obj = {
+            products: products,
+            packages: packages
+        };
+
         return (
             <div id="Profit" style={{ display: this.props.visible !== 'Revenue' ? 'none' : 'block' }}>
                 <div className="container" >
@@ -52,7 +96,7 @@ class revenue extends Component {
                                             </div>
                                             <input type="number"
                                                 className="form-control"
-                                                value={this.state.projection}
+                                                value={this.props.revenueData.projection}
                                                 onChange={this.updateProjection}
                                             />
                                         </div>
@@ -75,14 +119,14 @@ class revenue extends Component {
                                             </div>
                                             <input  type="number"
                                                     className="form-control" 
-                                                    value={this.state.productsPercentage} 
-                                                    onChange={(event) => this.updatePercentage(event, 'products')}
+                                                    value={this.props.revenueData.productsPercentage} 
+                                                    onChange={(event) => this.updatePercentageHandler(event, 'products')}
                                                     />
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <TableRevenue data={this.props.data} type='products' percentage={(this.state.productsPercentage / 100) * this.state.projection} />
+                            <TableRevenue data={this.props.data} type='products' percentage={obj} />
                         </div>
                     </div>
                     <div className="row">
@@ -100,14 +144,14 @@ class revenue extends Component {
                                             <input 
                                                     type="number" 
                                                     className="form-control" 
-                                                    value={this.state.packagesPercentage} 
-                                                    onChange={(event) => this.updatePercentage(event, 'packages')}
+                                                    value={this.props.revenueData.packagesPercentage} 
+                                                    onChange={(event) => this.updatePercentageHandler(event, 'packages')}
                                                     />
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <TableRevenue data={this.props.data} type='packages' percentage={(this.state.packagesPercentage / 100) * this.state.projection}/>
+                            <TableRevenue data={this.props.data} type='packages' percentage={obj} />
                         </div>
                     </div>
                 </div>
@@ -116,8 +160,12 @@ class revenue extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return { visible: state.visible, data: state.data };
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ updatePercentage, updateHeader }, dispatch);
 }
 
-export default connect(mapStateToProps)(revenue);
+function mapStateToProps(state) {
+    return { visible: state.visible, data: state.data, revenueData: state.percentage, header: state.header };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(revenue);

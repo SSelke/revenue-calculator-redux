@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import {connect} from 'react-redux';
-import { updateExpenses } from '../../../actions/index';
+import { updateExpenses, updateHeader } from '../../../actions/index';
 import { bindActionCreators } from 'redux';
 import { LIST_EXPENSES } from '../../../resources/list_expenses';
 
@@ -12,7 +12,7 @@ class expenses extends Component {
         }
 
         newData.expenses.push({ expense: 'New Expense', category: 'Chose a category', amount: 0, id: Math.floor(Math.random() * (10000 - 1) + 1)});
-        
+        this.getTotalExpenses(newData);
         this.props.updateExpenses(newData);
     }
 
@@ -22,6 +22,7 @@ class expenses extends Component {
         }
         const index = newData.expenses.findIndex(obj => obj.id === id);
         newData.expenses.splice(index, 1);
+        this.getTotalExpenses(newData);
         this.props.updateExpenses(newData);
     }
 
@@ -31,8 +32,28 @@ class expenses extends Component {
         }
         const index = newData.expenses.findIndex(obj => obj.id === id);
         newData.expenses[index][type] = event.target.value;
+        this.getTotalExpenses(newData);
         this.props.updateExpenses(newData);
     }
+
+    getTotalExpenses = (data) => {
+        const newData = {
+            ...this.props.header
+        };
+
+        const index = newData.headers.findIndex(obj => obj.type === 'Expenses');
+        let totalExpenses = 0;
+        data.expenses.map(data => {
+            totalExpenses += Number(data.amount);
+            return (null);
+        });
+
+        newData.headers[index].value = totalExpenses * 12;
+
+        this.props.updateHeader(newData);
+    }
+
+    
 
     render() {
 
@@ -105,7 +126,11 @@ class expenses extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ updateExpenses }, dispatch);
+    return bindActionCreators({ updateExpenses, updateHeader }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(expenses);
+function mapStateToProps(state) {
+    return { header: state.header }; 
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(expenses);

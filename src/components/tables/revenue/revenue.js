@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { updateProduct } from '../../../actions/index';
+import { updateProduct, updateHeader } from '../../../actions/index';
 
 class products extends Component {
 
@@ -16,8 +16,35 @@ class products extends Component {
         }
         const index = newData[this.props.type].findIndex(obj => obj.id === id);
         newData[this.props.type][index][param] = event.target.value;
+        this.getTotal(newData);
         this.props.updateProduct(newData);
     }
+
+    getTotal = (data) => {
+
+        const newData = {
+            ...this.props.header
+        };
+        let revenue = 0;
+        data.products.map(data => {
+            const months = data.price === 0 ? 0 : Math.ceil((((Number(data.percentage) / 100) * Number(this.props.percentage['products'])) / 12) / Number(data.price));
+            const revenueYear = Number(data.price) * (months * 12);
+            revenue += revenueYear;
+            return (null);
+        });
+        console.log(this.props.percentage['products']);
+
+        data.packages.map(data => {
+            const months = data.price === 0 ? 0 : Math.ceil((((Number(data.percentage) / 100) * Number(this.props.percentage['packages'])) / 12) / Number(data.price));
+            const revenueYear = Number(data.price) * (months * 12);
+            revenue += revenueYear;
+            return (null);
+        });
+        newData.headers[1].value = revenue;
+        newData.headers[0].value = revenue - this.props.header.headers[2].value;
+        this.props.updateHeader(newData);
+    }
+
 
 
     render() {
@@ -27,7 +54,6 @@ class products extends Component {
         let amountSoldPerMonth = 0;
         let amountSoldPerYear = 0;
         let totalPercentage = 0;
-
 
         return (
             <div className="table-responsive">
@@ -48,7 +74,7 @@ class products extends Component {
                             let amountPerMonth = 0;
                             let amountPerYear = 0;
                             let revenuePerYear = 0;
-                            months = Math.ceil((((Number(data.percentage) / 100) * Number(this.props.percentage)) / 12) / Number(data.price));
+                            months = data.price === 0 ? 0 : Math.ceil((((Number(data.percentage) / 100) * Number(this.props.percentage[this.props.type])) / 12) / Number(data.price));
                             amountPerMonth = months * Number(data.price);
                             amountPerYear = months * 12;
                             revenuePerYear = Number(data.price) * (months * 12);
@@ -96,11 +122,11 @@ class products extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ updateProduct }, dispatch);
+    return bindActionCreators({ updateProduct, updateHeader }, dispatch);
 }
 
 function mapStateToProps(state) {
-    return { totals: state.tableTotals};
+    return { totals: state.tableTotals, header: state.header };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(products);

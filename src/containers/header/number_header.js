@@ -5,7 +5,7 @@ class header extends Component {
     render() {
         return (
             <div>
-                {this.props.header.map( num => <div key={num} className="d-inline-block m-5">{num}</div>)}
+                {this.props.header.headers.map(data => <div key={data.type}>{data.value}</div>)}
             </div>
         );
     }
