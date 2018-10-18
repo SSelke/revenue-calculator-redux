@@ -3,9 +3,17 @@ import {connect} from 'react-redux';
 
 class header extends Component {
     render() {
+
+        const append = "/Hour";
+
         return (
             <div>
-                {this.props.header.headers.map(data => <div key={data.type}>{data.value}</div>)}
+                {this.props.header.headers.map(data => 
+                    <div className="d-inline-block m-5" key={data.type}>
+                        <div style={{fontSize: '24px'}}>{data.type}</div>
+                        <div style={{ fontSize: '18px' }}>${data.value.toLocaleString()}{data.type === "Rate" ? append : null}</div>
+                    </div>
+                )}
             </div>
         );
     }

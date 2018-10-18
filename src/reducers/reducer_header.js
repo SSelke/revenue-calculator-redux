@@ -6,7 +6,7 @@ import { UPDATE_HEADER } from '../actions/index';
 
 const initialState = {
     headers: [
-        { type: "Profit", value: 218404},
+        { type: "Profit", value: 367284},
         { type: "Revenue", value: 398880},
         { type: "Expenses", value: 31596},
         { type: "Rate", value: 807}

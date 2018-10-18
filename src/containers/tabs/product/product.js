@@ -9,19 +9,19 @@ class product extends Component {
                 <div className="container" >
                     <div className="row">
                         <div className="col">
-                            <h2 className="align-left">Products</h2>
-                            <p>Know which products your customers like most.</p>
+                            <h2 className="align-left mb-2 mt-5">Products</h2>
+                            <p style={{fontSize: '18px'}}>Know which products your customers like most.</p>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col">
-                            <h3>One-Time Products</h3>
+                            <h3 className="m-5">One-Time Products</h3>
                             <TableProducts data={this.props.data} type='products'/>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col">
-                            <h3>Retainer Packages</h3>
+                            <h3 className="m-5">Retainer Packages</h3>
                             <TableProducts data={this.props.data} type='packages'/>
                         </div>
                     </div>
