@@ -82,15 +82,15 @@ class revenue extends Component {
         return (
             <div id="Profit" style={{ display: this.props.visible !== 'Revenue' ? 'none' : 'block' }}>
                 <div className="container" >
-                    <div className="row mb-5 mt-5">
+                    <div className="row mb-5">
                         <div className="col">
                             <div className="container mb-2">
-                                <div className="row">
-                                    <div className="col-sm mb-2">
+                                <div className="row bg-dark text-white rounded box-shadow p-3">
+                                    <div className="col-sm">
                                         <h1 className="inline-block">Revenue Projection</h1>
                                     </div>
                                     <div className="col-sm">
-                                        <div className="input-group w-50 ml-auto mr-auto">
+                                        <div className="input-group w-50 ml-auto mr-auto mt-2">
                                             <div className="input-group-prepend">
                                                 <span className="input-group-text">$</span>
                                             </div>
@@ -108,12 +108,12 @@ class revenue extends Component {
                     <div className="row mb-5 mt-5">
                         <div className="col">
                             <div className="container mb-5">
-                                <div className="row">
-                                    <div className="col-sm mb-2">
-                                        <h3 className="inline-block">One-Time Products</h3>
+                                <div className="row bg-dark text-white rounded box-shadow p-3">
+                                    <div className="col-sm mb-2 mt-2">
+                                        <h3 className="inline-block">One-Time Products <span>${products.toLocaleString()}</span></h3>
                                     </div>
                                     <div className="col-sm ">
-                                        <div className="input-group ml-auto mr-auto" style={{ width: '150px' }}>
+                                        <div className="input-group ml-auto mr-auto mt-2" style={{ width: '150px' }}>
                                             <div className="input-group-prepend">
                                                 <span className="input-group-text">%</span>
                                             </div>
@@ -132,12 +132,12 @@ class revenue extends Component {
                     <div className="row">
                         <div className="col">
                             <div className="container mb-5">
-                                <div className="row">
-                                    <div className="col-sm mb-2">
-                                        <h3 className="inline-block">Retainer Packages</h3>
+                                <div className="row bg-dark text-white rounded box-shadow p-3">
+                                    <div className="col-sm mb-2 mt-2">
+                                        <h3 className="inline-block">Retainer Packages <span>${packages.toLocaleString()}</span></h3>
                                     </div>
                                     <div className="col-sm">
-                                        <div className="input-group ml-auto mr-auto" style={{ width: '150px' }}>
+                                        <div className="input-group ml-auto mr-auto mt-2" style={{ width: '150px' }}>
                                             <div className="input-group-prepend">
                                                 <span className="input-group-text">%</span>
                                             </div>

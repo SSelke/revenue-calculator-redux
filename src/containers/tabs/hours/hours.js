@@ -24,14 +24,14 @@ class product extends Component {
                 <div className="container mt-5">
                     <div className="row">
                         <div className="col-sm-6 mb-3">
-                            <div className="card text-white bg-secondary mb-3 ml-auto mr-auto h-100">
+                            <div className="d-inline-block card text-white bg-dark mb-3 ml-auto mr-auto h-100">
                                 <div className="card-body">
                                     <h1 className="card-title">Yearly Available Hours</h1>
-                                    <h2>{this.getTotalHours()}</h2>
+                                    <h2>{this.getTotalHours().toLocaleString()}</h2>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-sm-6">
+                        <div className="col-sm-6 ">
                             {this.props.data.map(data => <HoursInput key={data.type} text={data.type} amount={data.data} />)}
                         </div>
                     </div>

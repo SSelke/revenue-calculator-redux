@@ -40,15 +40,14 @@ class expenses extends Component {
         const newData = {
             ...this.props.header
         };
-
-        const index = newData.headers.findIndex(obj => obj.type === 'Expenses');
         let totalExpenses = 0;
         data.expenses.map(data => {
             totalExpenses += Number(data.amount);
             return (null);
         });
 
-        newData.headers[index].value = totalExpenses * 12;
+        newData.headers[2].value = totalExpenses * 12;
+        newData.headers[0].value = newData.headers[1].value - totalExpenses * 12;
 
         this.props.updateHeader(newData);
     }
@@ -93,17 +92,17 @@ class expenses extends Component {
 
         return (
             <Fragment>
-                <div>
+                <div className="">
                     <div className="d-inline-block m-3">
-                        <h5>Total (Month): ${totalExpenses.toLocaleString()}</h5>
+                        <h3><strong>Total (Month): ${totalExpenses.toLocaleString()}</strong></h3>
                     </div>
                     <div className="d-inline-block m-3">
-                        <h5>Total (Year): ${(totalExpenses * 12).toLocaleString()}</h5>
+                        <h3><strong>Total (Year): ${(totalExpenses * 12).toLocaleString()}</strong></h3>
                     </div>
                 </div>
-                <div className="table-responsive">
+                <div className="table-responsive bg-white rounded box-shadow">
                     <table className="table">
-                        <thead>
+                        <thead className="table-danger">
                             <tr>
                                 <th>Delete</th>
                                 <th>Expense</th>

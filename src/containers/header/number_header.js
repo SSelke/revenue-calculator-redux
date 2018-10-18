@@ -10,8 +10,8 @@ class header extends Component {
             <div>
                 {this.props.header.headers.map(data => 
                     <div className="d-inline-block m-5" key={data.type}>
-                        <div style={{fontSize: '24px'}}>{data.type}</div>
-                        <div style={{ fontSize: '18px' }}>${data.value.toLocaleString()}{data.type === "Rate" ? append : null}</div>
+                        <div style={{ fontSize: '24px' }}><strong>{data.type}</strong></div>
+                        <div style={{ fontSize: '18px' }}><strong>${data.value.toLocaleString()}{data.type === "Rate" ? append : null}</strong></div>
                     </div>
                 )}
             </div>

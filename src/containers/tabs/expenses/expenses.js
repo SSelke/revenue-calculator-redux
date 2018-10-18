@@ -10,7 +10,7 @@ class expenses extends Component {
                 style = {{ display: this.props.visible !== 'Expenses' ? 'none' : 'block' }} 
                 className = "justify-content-center">
                 <div className="container" >
-                    <div className="row">
+                    <div className="row bg-dark text-white rounded box-shadow p-3">
                         <div className="col">
                             <h2 className="align-left">Expenses</h2>
                             <p>The <em><strong>FASTEST</strong></em> way to profit is to reduce expenses!</p>

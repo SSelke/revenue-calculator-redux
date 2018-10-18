@@ -56,9 +56,9 @@ class products extends Component {
         let totalPercentage = 0;
 
         return (
-            <div className="table-responsive">
-                <table className="table">
-                    <thead>
+            <div className="table-responsive bg-white rounded box-shadow">
+                <table className="table table-hover">
+                    <thead className="table-success">
                         <tr>
                             <th>Product</th>
                             <th>%</th>
@@ -108,7 +108,7 @@ class products extends Component {
                         })}
                         <tr>
                             <td>Total: {this.state.totalPerYear}</td>
-                            <td>{totalPercentage}</td>
+                            <td>{totalPercentage}%</td>
                             <td>{amountSoldPerMonth}</td>
                             <td>${totalPerMonth.toLocaleString()}</td>
                             <td>{amountSoldPerYear}</td>

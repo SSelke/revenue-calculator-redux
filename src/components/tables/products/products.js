@@ -91,9 +91,9 @@ class products extends Component {
         let totalRate = 0;
 
         return (
-            <div className="table-responsive">
+            <div className="table-responsive bg-white rounded box-shadow">
                 <table className="table">
-                    <thead>
+                    <thead className="table-dark">
                         <tr>
                             <th>Delete</th>
                             <th>Product</th>

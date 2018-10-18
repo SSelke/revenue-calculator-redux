@@ -12,7 +12,7 @@ class navItems extends Component {
     render() {
         return (
             <li className="nav-item">
-                <div className="nav-link m-3" onClick={this.handleClick} style={{ fontSize: '24px' }}>{this.props.name}</div>
+                <h2 className="m-3" onClick={this.handleClick} style={{ fontSize: '28px', cursor: 'pointer' }}><strong>{this.props.name}</strong></h2>
             </li>
         );
     }

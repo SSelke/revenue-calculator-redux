@@ -6,7 +6,7 @@ import Container from '../../containers/container/container';
 class main extends Component {
     render() {
         return (
-            <div>
+            <div className="mb-5 container">
                 <h1 className="pt-5">Revenue Projection Calculator</h1>
                 <NumberHeader />
                 <ContainerHeader />
