@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { isVisible } from '../../../actions/index';
+import './nav-items.css';
 
 class navItems extends Component {
 
@@ -11,8 +12,8 @@ class navItems extends Component {
 
     render() {
         return (
-            <div className={ this.props.visible === this.props.name ? `bg-${this.props.color} rounded box-shadow text-white col` : "col"}>
-                <h2 className="m-3" onClick={this.handleClick} style={{ fontSize: '28px', cursor: 'pointer' }}><strong>{this.props.name}</strong></h2>
+            <div className={this.props.visible === this.props.name ? `bg-${this.props.color} rounded box-shadow text-white ml-auto mr-auto d-md-inline d-sm-block navs` : "navs ml-auto mr-auto d-md-inline d-sm-block"}>
+                <h2 className="m-3" onClick={this.handleClick}><strong>{this.props.name}</strong></h2>
             </div>
         );
     }

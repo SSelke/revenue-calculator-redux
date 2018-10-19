@@ -1,0 +1,9 @@
+@media (max-width: 799px) {
+    .navs {
+    width: 150px;
+}
+
+.navs h2 {
+    font-size: 18px;
+}
+}
