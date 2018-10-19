@@ -4,12 +4,14 @@ import NavItem from './nav_items/nav_items';
 class nav extends Component {
     render() {
         return (
-            <ul className="nav justify-content-center mb-5" >
-                <NavItem name='Products' />
-                <NavItem name='Revenue' />
-                <NavItem name='Expenses' />
-                <NavItem name='Hours' />
-            </ul>
+            <div className="container mb-5" >
+                <div className="row">
+                    <NavItem name='Products' color="dark" />
+                    <NavItem name='Revenue' color="success" />
+                    <NavItem name='Expenses' color="danger" />
+                    <NavItem name='Hours' color="info" />
+                </div>
+            </div>
         );
     }
 }

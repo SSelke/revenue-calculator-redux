@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import './number_header.css';
 
 class header extends Component {
     render() {
@@ -7,11 +8,11 @@ class header extends Component {
         const append = "/Hour";
 
         return (
-            <div>
+            <div className="container">
                 {this.props.header.headers.map(data => 
                     <div className="d-inline-block m-5" key={data.type}>
-                        <div style={{ fontSize: '24px' }}><strong>{data.type}</strong></div>
-                        <div style={{ fontSize: '18px' }}><strong>${data.value.toLocaleString()}{data.type === "Rate" ? append : null}</strong></div>
+                        <div className="header-text"><strong>{data.type}</strong></div>
+                        <div className="header-data"><strong>${data.value.toLocaleString()}{data.type === "Rate" ? append : null}</strong></div>
                     </div>
                 )}
             </div>

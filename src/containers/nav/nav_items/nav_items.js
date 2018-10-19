@@ -11,15 +11,19 @@ class navItems extends Component {
 
     render() {
         return (
-            <li className="nav-item">
+            <div className={ this.props.visible === this.props.name ? `bg-${this.props.color} rounded box-shadow text-white col` : "col"}>
                 <h2 className="m-3" onClick={this.handleClick} style={{ fontSize: '28px', cursor: 'pointer' }}><strong>{this.props.name}</strong></h2>
-            </li>
+            </div>
         );
     }
+}
+
+function mapStateToProps(state) {
+    return { visible: state.visible };
 }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ isVisible }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(navItems);
+export default connect(mapStateToProps, mapDispatchToProps)(navItems);
