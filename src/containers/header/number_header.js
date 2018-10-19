@@ -10,7 +10,7 @@ class header extends Component {
         return (
             <div className="container">
                 {this.props.header.headers.map(data => 
-                    <div className="d-inline-block m-5" key={data.type}>
+                    <div className="d-inline-block m-4" key={data.type}>
                         <div className="header-text"><strong>{data.type}</strong></div>
                         <div className="header-data"><strong>${data.value.toLocaleString()}{data.type === "Rate" ? append : null}</strong></div>
                     </div>
